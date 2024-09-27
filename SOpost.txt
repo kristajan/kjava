@@ -1,0 +1,109 @@
+### Here is prettified tests I would write to stackoverflow:
+I'm having a similar problem, and also new to python.  Here are some things I tried and the results.
+This is my 1st post to stackoverflow, absolutely the best reference online! I'm having a similar problem as kumar s and also new to python.  Here are some things I tried and the results. Python version is 3.12.3 running on Anaconda JupyterLab on my laptop.  My answer to the question is, use pandas DataFrame.  I couldn't get any native Python suggestions to get the desired dictionary.  Below, the code is long with prints, but the output is easier to look at.
+I modified the data a little from the original:
+1. change ,} to } and ,] to ]
+2. change Word-like curly-double-quote to plain double-quote "
+
+'''
+CODE:
+!python --version
+# https://stackoverflow.com/questions/53471051/is-it-ok-if-my-json-data-is-read-as-list-instead-of-python-dictionary
+# https://stackoverflow.com/questions/62834614/json-file-gets-load-as-list-instead-of-dict-using-python
+testdata =  {"Model": " 500", "Task": "71-00-00-200-802 "}, \
+            { "Model": " 900","Task": " 71-00-00-200-802" }
+testlist=[  { "Model": " 500", "Task": "71-00-00-200-802 " }, \
+            { "Model": " 900","Task":"71-00-00-200-802" }]
+print('inputs:')
+print('type of testdata is ', type(testdata), f'\n{testdata=}')
+print('type of testlist is ', type(testlist), f'\n{testlist=}')
+print('\nresult that is wanted:\n{"Model" : ["500","900"], "Task" : ["71-00-00-200-802 "," 71-0"-00-200-802"] }')
+
+#testdata.get("Model")  # I want both 500 and 700, and this get gives error
+
+# As a comprehension:
+# Python >= 2.7
+print('\nk: v for d in testlist for k, v in d.items()}')
+print({k: v for d in testlist for k, v in d.items()})
+
+print('\nfor x in testlist:')
+for x in testlist:
+    print(type(x)) # prints <type 'dict'>
+    print('x=',x)
+print(' ok, types are dict, but how to merge or join?')
+
+print('\nfor d in testlist: result.update(d)')
+result = {}
+for d in testlist:
+    result.update(d)
+print ('result=', result)
+# so, either convert tuples to dict or in   for x  somehow merge to get
+# {"Model" : ["500","900"], "Task" : [71,72] }
+
+from functools import reduce
+result_dict = reduce(lambda a, b: {**a, **b}, testlist)
+print('\nreduce(lamda ... result_dict = ', result_dict)
+
+# https://stackoverflow.com/questions/3494906/how-do-i-merge-a-list-of-dicts-into-a-single-dict
+print('\nnew_dict = {str(k).replace(" ","_"):v for list_item in testlist for (k,v) in list_item.items()}')
+new_dict = {str(k).replace(" ","_"):v for list_item in testlist for (k,v) in list_item.items()}   
+print('new_dict=', new_dict)
+
+# https://stackoverflow.com/questions/62834614/json-file-gets-load-as-list-instead-of-dict-using-python
+dicy = dict(enumerate(testdata))
+print('\ntype of enumerate(testdata) is ', type(dicy))
+print(dicy)
+dicy = dict(enumerate(testlist))
+print('type of enumerate(testlist) is ', type(dicy))
+print(dicy)
+print('\ndict(testlist) is ', dict(testlist))
+print('dict(testdata) is ', dict(testdata))
+print('again, how to merge or join?')
+      
+import pandas as pd
+print('\npd.json_normalize(testdata)=\n', pd.json_normalize(testdata))  # THIS ONE WORKS
+
+
+OUTPUT:
+Python 3.12.3
+inputs:
+type of testdata is  <class 'tuple'> 
+testdata=({'Model': ' 500', 'Task': '71-00-00-200-802 '}, {'Model': ' 900', 'Task': ' 71-00-00-200-802'})
+type of testlist is  <class 'list'> 
+testlist=[{'Model': ' 500', 'Task': '71-00-00-200-802 '}, {'Model': ' 900', 'Task': '71-00-00-200-802'}]
+
+result that is wanted:
+{"Model" : ["500","900"], "Task" : ["71-00-00-200-802 "," 71-0"-00-200-802"] }
+
+k: v for d in testlist for k, v in d.items()}
+{'Model': ' 900', 'Task': '71-00-00-200-802'}
+
+for x in testlist:
+<class 'dict'>
+x= {'Model': ' 500', 'Task': '71-00-00-200-802 '}
+<class 'dict'>
+x= {'Model': ' 900', 'Task': '71-00-00-200-802'}
+ ok, types are dict, but how to merge or join?
+
+for d in testlist: result.update(d)
+result= {'Model': ' 900', 'Task': '71-00-00-200-802'}
+
+reduce(lamda ... result_dict =  {'Model': ' 900', 'Task': '71-00-00-200-802'}
+
+new_dict = {str(k).replace(" ","_"):v for list_item in testlist for (k,v) in list_item.items()}
+new_dict= {'Model': ' 900', 'Task': '71-00-00-200-802'}
+
+type of enumerate(testdata) is  <class 'dict'>
+{0: {'Model': ' 500', 'Task': '71-00-00-200-802 '}, 1: {'Model': ' 900', 'Task': ' 71-00-00-200-802'}}
+type of enumerate(testlist) is  <class 'dict'>
+{0: {'Model': ' 500', 'Task': '71-00-00-200-802 '}, 1: {'Model': ' 900', 'Task': '71-00-00-200-802'}}
+
+dict(testlist) is  {'Model': 'Task'}
+dict(testdata) is  {'Model': 'Task'}
+again, how to merge or join?
+
+pd.json_normalize(testdata)=
+   Model               Task
+0   500  71-00-00-200-802 
+1   900   71-00-00-200-802
+''';
