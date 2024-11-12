@@ -1,0 +1,11 @@
+,LanguageWorkedWith,countLanguageWorkedWith,DatabaseWorkedWith,countDatabaseWorkedWith,PlatformWorkedWith,countPlatformWorkedWith,WebFrameWorkedWith,countWebFrameWorkedWith,LanguageDesireNextYear,countLanguageDesireNextYear,DatabaseDesireNextYear,countDatabaseDesireNextYear,PlatformDesireNextYear,countPlatformDesireNextYear,WebFrameDesireNextYear,countWebFrameDesireNextYear
+0,JavaScript,8687,MySQL,5469,Linux,5811,jQuery,4629,JavaScript,6630,PostgreSQL,4328,Linux,5865,React.js,4714
+1,HTML/CSS,7830,Microsoft SQL Server,4110,Windows,5563,Angular/Angular.js,3327,HTML/CSS,5328,MongoDB,3649,Docker,5804,Vue.js,3143
+2,SQL,7106,PostgreSQL,4097,Docker,4378,React.js,3302,Python,5239,Redis,3331,AWS,4442,Angular/Angular.js,3059
+3,Bash/Shell/PowerShell,4642,SQLite,3248,AWS,3588,ASP.NET,3042,SQL,5012,MySQL,3281,Windows,3888,ASP.NET,2382
+4,Python,4542,MongoDB,3016,Slack,2786,Express,2028,TypeScript,4088,Elasticsearch,2856,Android,3231,jQuery,2241
+5,Java,4506,Redis,2508,MacOS,2718,Spring,1728,C#,3591,Microsoft SQL Server,2706,Kubernetes,3201,Express,1957
+6,C#,4288,Elasticsearch,1954,Android,2693,Vue.js,1485,Bash/Shell/PowerShell,3097,SQLite,2437,MacOS,2593,Spring,1564
+7,TypeScript,3232,Oracle,1744,Microsoft Azure,1711,Flask,1186,Java,2953,Firebase,1650,Raspberry Pi,2525,Django,1504
+8,PHP,2913,MariaDB,1709,Raspberry Pi,1614,Django,1176,Go,2759,MariaDB,1385,Google Cloud Platform,2401,Flask,1240
+9,C++,1946,Firebase,1314,WordPress,1490,Laravel,939,Kotlin,1890,DynamoDB,1044,Slack,2359,Ruby on Rails,970
